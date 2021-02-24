@@ -8,6 +8,14 @@ function mapProductToDto(product) {
     }
 }
 
+function mapShoppingCartToDto(shoppingCart) {
+    return {
+        id: shoppingCart.id,
+        status: shoppingCart.status
+    }
+}
+
 module.exports = {
-    mapProductToDto
+    mapProductToDto,
+    mapShoppingCartToDto
 }
