@@ -4,6 +4,7 @@ const express = require("express");
 const shoppingCartsRouter = express.Router();
 const shoppingCartsController = require("../controllers/shoppingCartController");
 
+shoppingCartsRouter.get("/shoppingcarts", shoppingCartsController.findAll);
 shoppingCartsRouter.post("/shoppingcarts", shoppingCartsController.save);
 shoppingCartsRouter.patch("/shoppingcarts/:id", shoppingCartsController.patch);
 shoppingCartsRouter.get("/shoppingcarts/:id", shoppingCartsController.find);
