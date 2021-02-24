@@ -2,7 +2,7 @@
 
 const express = require("express");
 const shoppingCartsRouter = express.Router();
-const shoppingCartsController = require("../controllers/shoppingCartController");
+const shoppingCartsController = require("../controllers/shoppingCartsController");
 
 shoppingCartsRouter.get("/shoppingcarts", shoppingCartsController.findAll);
 shoppingCartsRouter.post("/shoppingcarts", shoppingCartsController.save);
