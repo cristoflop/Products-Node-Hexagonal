@@ -3,19 +3,19 @@
 const {Model, DataTypes} = require('sequelize');
 const sequelize = require("../sequelize");
 const Product = require("./product");
-const ShoppingCart_Product = require("./shoppingCart_product");
+const CartItem = require("./cartItem");
 
 class ShoppingCart extends Model {
 }
 
 ShoppingCart.init({
-    status: DataTypes.ENUM("completed", "in-progress")
+    status: DataTypes.ENUM("completo", "abierto")
 }, {
     sequelize,
     modelName: 'shoppingCart'
 });
 
-ShoppingCart.belongsToMany(Product, {through: ShoppingCart_Product});
-Product.belongsToMany(ShoppingCart, {through: ShoppingCart_Product});
+ShoppingCart.belongsToMany(Product, {through: CartItem});
+Product.belongsToMany(ShoppingCart, {through: CartItem});
 
 module.exports = ShoppingCart;

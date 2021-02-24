@@ -3,8 +3,7 @@
 function mapProductToDto(product) {
     return {
         id: product.id,
-        name: product.name,
-        description: product.description
+        name: product.name
     }
 }
 
@@ -20,8 +19,7 @@ function mapCartProductToDto(cartProduct) {
     return {
         id: cartProduct.id,
         name: cartProduct.name,
-        description: cartProduct.description,
-        quantity: cartProduct.shoppingCart_product.quantity
+        quantity: cartProduct.cartItem.quantity
     }
 }
 

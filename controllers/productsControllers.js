@@ -14,7 +14,6 @@ async function findAll(req, res) {
 async function save(req, res) {
     await sequelize.sync();
     const name = req.body.name.trim();
-    const description = req.body.description;
 
     const product = await Product.findOne({where: {name}});
     if (product != null) {
@@ -24,8 +23,7 @@ async function save(req, res) {
     }
 
     const insertedProduct = await Product.create({
-        name: name,
-        description: description
+        name: name
     });
 
     res.status(201);

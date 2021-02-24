@@ -5,14 +5,14 @@
 const {Model, DataTypes} = require('sequelize');
 const sequelize = require("../sequelize");
 
-class ShoppingCart_Product extends Model {
+class CartItem extends Model {
 }
 
-ShoppingCart_Product.init({
+CartItem.init({
     quantity: DataTypes.INTEGER
 }, {
     sequelize,
-    modelName: 'shoppingCart_product'
+    modelName: 'cartItem'
 });
 
-module.exports = ShoppingCart_Product;
+module.exports = CartItem;

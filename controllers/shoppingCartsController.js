@@ -2,7 +2,7 @@
 
 const ShoppingCart = require("../domain/shoppingCart");
 const Product = require("../domain/product");
-const ShoppingCart_Product = require("../domain/shoppingCart_product");
+const CartItem = require("../domain/cartItem");
 const sequelize = require("../sequelize");
 const mapper = require("../utils/mapper").mapShoppingCartToDto;
 
@@ -17,7 +17,7 @@ async function save(req, res) {
     await sequelize.sync();
 
     const shoppingCart = await ShoppingCart.create({
-        status: "in-progress"
+        status: "abierto"
     });
 
     res.status(201);
@@ -35,7 +35,7 @@ async function patch(req, res) {
         return;
     }
     await ShoppingCart.update(
-        {status: "completed"},
+        {status: "completado"},
         {where: {id}}
     );
 
@@ -96,20 +96,20 @@ async function addProductToCart(req, res) {
         return;
     }
 
-    const relation = await ShoppingCart_Product.findOne({
+    const relation = await CartItem.findOne({
         where: {
             shoppingCartId: cart_id,
             productId: prod_id
         }
     });
     if (relation == null) { // no existe
-        await ShoppingCart_Product.create({
+        await CartItem.create({
             shoppingCartId: cart_id,
             productId: prod_id,
             quantity: quantity
         });
     } else {
-        await ShoppingCart_Product.update(
+        await CartItem.update(
             {quantity: quantity},
             {
                 where: {
@@ -129,7 +129,7 @@ async function removeProductFromCart(req, res) {
     const cart_id = req.params.cart_id;
     const prod_id = req.params.prod_id;
 
-    await ShoppingCart_Product.destroy({
+    await CartItem.destroy({
         where: {
             shoppingCartId: cart_id,
             productId: prod_id
