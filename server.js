@@ -36,7 +36,7 @@ function middlewareServerError(error, request, response, next) {
     response.json(error);
 }
 
-app.listen(config.port, err => {
+app.listen(config.port, config.dbConfig.host, err => {
     if (err)
         console.error(`No se ha podido iniciar el servidor: ${err.message}`);
     else

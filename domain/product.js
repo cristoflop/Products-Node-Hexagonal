@@ -8,7 +8,7 @@ class Product extends Model {
 
 Product.init({
     name: DataTypes.STRING,
-    energy: DataTypes.STRING
+    description: DataTypes.STRING
 }, {
     sequelize,
     modelName: 'product'
