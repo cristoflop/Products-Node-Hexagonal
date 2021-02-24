@@ -13,12 +13,23 @@ async function findAll(req, res) {
 
 async function save(req, res) {
     await sequelize.sync();
-    const product = await Product.create({
-        name: req.body.name,
-        description: req.body.description
+    const name = req.body.name.trim();
+    const description = req.body.description;
+
+    const product = await Product.findOne({where: {name}});
+    if (product != null) {
+        res.status(409);
+        res.json({message: "Product already exists"});
+        return;
+    }
+
+    const insertedProduct = await Product.create({
+        name: name,
+        description: description
     });
-    res.json(product);
+
     res.status(201);
+    res.json(mapper(insertedProduct));
 }
 
 module.exports = {
