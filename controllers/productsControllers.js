@@ -32,7 +32,41 @@ async function save(req, res) {
     res.json(mapper(insertedProduct));
 }
 
+async function find(req, res) {
+    await sequelize.sync();
+    const id = req.params.id;
+
+    const product = await Product.findOne({where: {id}});
+    if (product == null) {
+        res.status(404);
+        res.json({message: "Product doesn't exist"});
+        return;
+    }
+
+    res.status(200);
+    res.json(mapper(product));
+}
+
+async function remove(req, res) {
+    await sequelize.sync();
+    const id = req.params.id;
+
+    const product = await Product.findOne({where: {id}});
+    if (product == null) {
+        res.status(404);
+        res.json({message: "Product doesn't exist"});
+        return;
+    }
+
+    await Product.destroy({where: {id}});
+
+    res.status(204);
+    res.json({message: "Product successfully removed"});
+}
+
 module.exports = {
     findAll,
-    save
+    save,
+    find,
+    remove
 }
